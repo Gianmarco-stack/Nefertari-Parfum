@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Obelisco Parfum</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      background-color: #fff;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #a30000;
+      color: black;
+      padding: 20px 10px;
+      text-align: center;
+    }
+
+    .logo-img {
+      max-height: 100px;
+      margin-bottom: 10px;
+    }
+
+    .logo-title {
+      font-size: 2.7rem;
+      font-weight: bold;
+      color: black;
+      margin: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    .menu-btn {
+      background-color: #a30000;
+      border: none;
+      color: black;
+      font-weight: bold;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 4px;
+      box-shadow: 1px 1px 5px #330000;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 45px;
+      left: 0;
+      background-color: #a30000;
+      min-width: 160px;
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      border-bottom: 1px solid #660000;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #660000;
+      color: gold;
+    }
+
+    .show {
+      display: block;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 1.3rem;
+      line-height: 1.7;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .page h2 {
+      color: #a30000;
+      margin-bottom: 15px;
+      /* striscia rossa rimossa */
+      /* border-bottom: 2px solid #a30000; */
+      padding-bottom: 5px;
+    }
+
+    ul.profumi-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    ul.profumi-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .social-link {
+      color: #a30000;
+      text-decoration: none;
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    .social-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <button class="menu-btn" onclick="toggleMenu()">Menu ▼</button>
+  <div id="dropdown" class="dropdown-content">
+    <a href="#" onclick="showPage('contatti'); return false;">Contatti</a>
+    <a href="#" onclick="showPage('catalogo'); return false;">Catalogo Profumi</a>
+    <a href="#" onclick="showPage('home'); return false;">Home</a>
+  </div>
+</nav>
+
+<header>
+  <img src="logo.png" alt="Obelisco Parfum Logo" class="logo-img" />
+  <h1 class="logo-title">Obelisco Parfum</h1>
+</header>
+
+<main>
+  <div id="home" class="page active">
+    <p style="font-size: 1.5rem;">
+      Obelisco Parfum è la nuova essenza dell’eleganza italiana.  
+      Nella città eterna anche l'aria profuma di storie...  
+      <br />
+      Noi le mettiamo in boccetta.  
+      <br />
+      Giovani, Veri e Freschi.
+    </p>
+  </div>
+
+  <div id="contatti" class="page">
+    <h2>Contatti</h2>
+    <p>Seguici sui social e per info, dubbi o ordini scrivici direttamente:</p>
+    <ul>
+      <li>📱 <a href="https://www.tiktok.com/@obelisco_italia" target="_blank" class="social-link">@obelisco_italia</a></li>
+      <li>✉️ Email: <a href="mailto:info@obeliscoparfum.it" class="social-link">info@obeliscoparfum.it</a></li>
+      <li>💬 WhatsApp: <a href="https://wa.me/1234567890" target="_blank" class="social-link">+39 123 456 7890</a></li>
+    </ul>
+  </div>
+
+  <div id="catalogo" class="page">
+    <h2>Catalogo Profumi</h2>
+    <ul class="profumi-list">
+      <li><strong>Roma Dorata</strong> — Note di agrumi e ambra</li>
+      <li><strong>Vento di Tevere</strong> — Fragranza fresca e acquatica</li>
+      <li><strong>Notte Imperiale</strong> — Profumo intenso di vaniglia e spezie</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+function toggleMenu() {
+  document.getElementById("dropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.menu-btn')) {
+    let dropdowns = document.getElementsByClassName("dropdown-content");
+    for (let i = 0; i < dropdowns.length; i++) {
+      let openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+function showPage(id) {
+  let pages = document.getElementsByClassName('page');
+  for (let page of pages) {
+    page.classList.remove('active');
+  }
+  document.getElementById(id).classList.add('active');
+  document.getElementById("dropdown").classList.remove("show");
+}
+</script>
+
+</body>
+</html>
